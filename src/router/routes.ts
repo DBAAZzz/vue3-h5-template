@@ -37,9 +37,12 @@ const routes: Array<RouteRecordRaw> = [
   //   ]
   // },
   {
-    path: "/promotion",
+    path: "/",
     name: "promotion",
-    component: () => import("@/views/promotion/index.vue")
+    component: () => import("@/views/promotion/index.vue"),
+    meta: {
+      title: "数字生命推广"
+    }
   }
 ];
 
