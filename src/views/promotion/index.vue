@@ -18,11 +18,11 @@ onMounted(() => {
     defaultPlaybackRate: 1,
     "x5-video-player-fullscreen": true,
     "x5-video-orientation": "portraint",
-    fitVideoSize: 'fixWidth',
+    fitVideoSize: "fixWidth",
     playsinline: false,
-    ignores: ['time', 'play', 'volume', 'progress', 'replay'],
+    ignores: ["time", "play", "volume", "progress", "replay"],
     controlsList: ["noremoteplayback", "nodownload"],
-    videoInit: true,
+    videoInit: true
   });
   new Player({
     id: "video",
@@ -31,7 +31,7 @@ onMounted(() => {
     width: "77.33vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
-    fitVideoSize: 'fixWidth',
+    fitVideoSize: "fixWidth",
     // videoFillMode: '',
     "x5-video-player-fullscreen": true,
     "x5-video-orientation": "portraint",
@@ -48,7 +48,7 @@ onMounted(() => {
     defaultPlaybackRate: 1,
     "x5-video-player-fullscreen": true,
     "x5-video-orientation": "portraint",
-    fitVideoSize: 'fixWidth',
+    fitVideoSize: "fixWidth",
     playsinline: false,
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
@@ -57,7 +57,7 @@ onMounted(() => {
 });
 
 function initPlayer(vm: Player) {
-  vm.setEventsMiddleware
+  vm.setEventsMiddleware;
   vm.once("play", () => {
     window.gtag &&
       window.gtag("event", "playVideo", {
@@ -89,7 +89,9 @@ function callPhone() {
       </div>
       <p class="text-box">
         <span class="text1">如果您也需要</span>
-        <span class="text2">&nbsp;更全方位的专属人生回顾《纪录片》定制，做为数字遗产保留，可添加工作人员微信或拨打电话：</span>
+        <span class="text2"
+          >&nbsp;更全方位的专属人生回顾《纪录片》定制，做为数字遗产保留，可添加工作人员微信或拨打电话：</span
+        >
         <span class="text3" @click="callPhone">181-5550-2266</span>
       </p>
       <p class="text4">扫码联系</p>
@@ -101,7 +103,9 @@ function callPhone() {
       </div>
       <p class="text-box">
         <span class="text1">如果您也需要</span>
-        <span class="text2">&nbsp;再次与亲人对话，让生命延续，请联系工作人员定制数字生命《永生版》，将他/她尊贵的品德，伟大的精神，以及对您的爱永远传承下去。</span>
+        <span class="text2"
+          >&nbsp;再次与亲人对话，让生命延续，请联系工作人员定制数字生命《永生版》，将他/她尊贵的品德，伟大的精神，以及对您的爱永远传承下去。</span
+        >
       </p>
     </div>
     <img class="pic" alt="code" src="~@/assets/pic1.png" />
@@ -149,7 +153,7 @@ function callPhone() {
   box-sizing: content-box;
   width: 174px;
   padding: 2px;
-  margin: 48px auto 0 auto;
+  margin: 46px auto 0 auto;
   background-color: #f9daac;
   border-radius: 4px;
 }
@@ -165,7 +169,7 @@ function callPhone() {
 .top .topText1,
 .topText3 {
   display: block;
-  margin-top: 10px;
+  margin-top: 8px;
   color: #a35411;
   font-size: 12px;
   line-height: 18px;
@@ -271,7 +275,6 @@ function callPhone() {
   z-index: 1;
 }
 
-
 .main .bottom {
   position: relative;
   width: 341px;
@@ -297,7 +300,6 @@ function callPhone() {
   border-radius: 4px;
   z-index: 1;
 }
-
 
 .pic {
   position: absolute;
