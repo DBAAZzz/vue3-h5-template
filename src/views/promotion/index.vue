@@ -13,7 +13,21 @@ onMounted(() => {
     id: "mse",
     url: `http://ceremony.yauma.cn/U1/videos/${id}.mp4`,
     height: "40vw",
-    width: "71.47vw",
+    width: "40vw",
+    playbackRate: [1],
+    defaultPlaybackRate: 1,
+    "x5-video-player-fullscreen": true,
+    "x5-video-orientation": "portraint",
+    playsinline: false,
+    ignores: ['time', 'play', 'volume', 'progress'],
+    controlsList: ["noremoteplayback", "nodownload"],
+    videoInit: true,
+  });
+  new Player({
+    id: "video",
+    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4 ",
+    height: "42.9vw",
+    width: "77.07vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     "x5-video-player-fullscreen": true,
@@ -23,8 +37,8 @@ onMounted(() => {
     videoInit: true
   });
   new Player({
-    id: "video",
-    url: "http://ceremony.yauma.cn/006.webm",
+    id: "video2",
+    url: "http://ceremony.yauma.cn/resource/20240001.mp4",
     height: "42.9vw",
     width: "77.07vw",
     playbackRate: [1],
@@ -40,8 +54,6 @@ onMounted(() => {
 
 function initPlayer(vm: Player) {
   vm.once("play", () => {
-    console.log(window.gtag);
-
     window.gtag &&
       window.gtag("event", "playVideo", {
         event_category: "Click",
@@ -66,21 +78,25 @@ function callPhone() {
       <p class="topText2">更是一个纪念亲人</p>
       <p class="topText3">表达爱和怀念的方式</p>
     </div>
-    <div class="bottom">
+    <div class="mid">
       <div class="video-box">
         <div id="video"></div>
       </div>
       <p class="text-box">
         <span class="text1">如果您也需要</span>
-        <span class="text2"
-          >&nbsp;更全方位的专属人生回顾纪录片定制，用于日常悼念及追悼会播放，可添加工作人员微信或拨打电话：</span
-        >
+        <span class="text2">&nbsp;更全方位的专属人生回顾《纪录片》定制，用于日常悼念及追悼会播放，可添加工作人员微信或拨打电话：</span>
         <span class="text3" @click="callPhone">181-5550-2266</span>
       </p>
       <p class="text4">扫码联系</p>
       <img class="code" alt="code" src="~@/assets/code.png" />
-      <p class="text5">
-        尽管他/她已经离开了我们的世界，但通过这段数字遗言，他/她的声音、笑容和爱将永远留在我们心中。
+    </div>
+    <div class="bottom">
+      <div class="bottom-video">
+        <div id="video2"></div>
+      </div>
+      <p class="text-box">
+        <span class="text1">如果您也需要</span>
+        <span class="text2">&nbsp;再次与亲人对话，让生命延续，请联系工作人员定制数字生命《永生版》，将他/她尊贵的品德，伟大的精神，以及对您的爱永远传承下去。</span>
       </p>
     </div>
     <img class="pic" alt="code" src="~@/assets/pic1.png" />
@@ -93,11 +109,11 @@ function callPhone() {
   display: block;
   min-height: 100vh;
   width: 100%;
-  height: 928px;
+  height: 1224px;
   /* 兼容 iOS < 11.2 */
-  padding-bottom: constant(safe-area-inset-bottom);
+  padding-mid: constant(safe-area-inset-mid);
   /* 兼容 iOS >= 11.2 */
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-mid: env(safe-area-inset-mid);
   background-image: url("../../assets/bg.png");
   background-size: 100% 100%;
   background-color: #f1c996;
@@ -106,7 +122,7 @@ function callPhone() {
 
 .main::after {
   position: absolute;
-  bottom: 11px;
+  bottom: 32px;
   width: 100%;
   content: "— 当涂县殡仪馆 —";
   font-size: 15px;
@@ -126,7 +142,7 @@ function callPhone() {
 
 .mse-box {
   box-sizing: content-box;
-  width: 268px;
+  width: 150px;
   padding: 2px;
   margin: 45px auto 0 auto;
   background-color: #f9daac;
@@ -136,7 +152,7 @@ function callPhone() {
 #mse {
   margin: 0;
   padding: 0;
-  width: 268px;
+  width: 150px;
   height: 150px;
   border-radius: 4px;
 }
@@ -169,20 +185,27 @@ function callPhone() {
   margin-top: 0;
 }
 
-.main .bottom {
+.main .mid {
   position: relative;
   width: 341px;
-  height: 534px;
+  height: 453px;
   margin: 11px auto 0 auto;
-  background-image: url("../../assets/bottom_mask.png");
+  background-image: url("../../assets/mid_mask.png");
   background-size: 100% 100%;
   overflow: auto;
 }
 
+.main .mid .text-box {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 0 23px;
+  line-height: 16px;
+}
+
 .main .bottom .text-box {
   display: inline-block;
-  margin-top: 13px;
-  padding: 0 26px;
+  margin-top: 10px;
+  padding: 0 23px;
   line-height: 16px;
 }
 
@@ -210,8 +233,8 @@ function callPhone() {
   line-height: 20px;
 }
 
-.bottom .text4 {
-  margin-top: 16px;
+.mid .text4 {
+  margin-top: 12px;
   text-align: center;
   color: #6b3103;
   font-size: 16px;
@@ -219,38 +242,57 @@ function callPhone() {
   line-height: 22px;
 }
 
-.bottom .text5 {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 0 26px;
-  font-size: 14px;
-  color: #733401;
-  line-height: 20px;
-}
-
-.bottom .code {
+.mid .code {
   display: block;
   margin: 0 auto;
-  margin-top: 6px;
-  width: 98px;
-  height: 98px;
+  margin-top: 8px;
+  width: 102px;
+  height: 102px;
 }
 
 .video-box {
   box-sizing: content-box;
-  width: 289px;
-  margin: 46px auto 0 auto;
+  width: 290px;
+  margin: 40px auto 0 auto;
   padding: 2px;
   background-color: #f9daac;
   border-radius: 4px;
 }
 
 #video {
-  width: 289px;
-  height: 161px;
+  width: 290px;
+  height: 163px;
   border-radius: 4px;
   z-index: 1;
 }
+
+
+.main .bottom {
+  position: relative;
+  width: 341px;
+  height: 332px;
+  margin: 12px auto 0 auto;
+  background-image: url("../../assets/bottom_mask.png");
+  background-size: 100% 100%;
+  overflow: auto;
+}
+
+.bottom-video {
+  box-sizing: content-box;
+  width: 290px;
+  margin: 40px auto 0 auto;
+  padding: 2px;
+  background-color: #f9daac;
+  border-radius: 4px;
+}
+
+#video2 {
+  width: 290px;
+  height: 163px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
 
 .pic {
   position: absolute;

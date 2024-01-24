@@ -41,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "promotion",
     component: () => import("@/views/promotion/index.vue"),
     meta: {
-      title: "数字生命推广"
+      title: "亲人的回声"
     }
   }
 ];
