@@ -12,14 +12,15 @@ onMounted(() => {
   player = new Player({
     id: "mse",
     url: `http://ceremony.yauma.cn/U1/videos/${id}.mp4`,
-    height: "40vw",
-    width: "40vw",
+    height: "46.4vw",
+    width: "46.4vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     "x5-video-player-fullscreen": true,
     "x5-video-orientation": "portraint",
+    fitVideoSize: 'fixWidth',
     playsinline: false,
-    ignores: ['time', 'play', 'volume', 'progress'],
+    ignores: ['time', 'play', 'volume', 'progress', 'replay'],
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true,
   });
@@ -27,9 +28,11 @@ onMounted(() => {
     id: "video",
     url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4 ",
     height: "42.9vw",
-    width: "77.07vw",
+    width: "77.33vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
+    fitVideoSize: 'fixWidth',
+    // videoFillMode: '',
     "x5-video-player-fullscreen": true,
     "x5-video-orientation": "portraint",
     playsinline: false,
@@ -40,11 +43,12 @@ onMounted(() => {
     id: "video2",
     url: "http://ceremony.yauma.cn/resource/20240001.mp4",
     height: "42.9vw",
-    width: "77.07vw",
+    width: "77.33vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     "x5-video-player-fullscreen": true,
     "x5-video-orientation": "portraint",
+    fitVideoSize: 'fixWidth',
     playsinline: false,
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
@@ -53,6 +57,7 @@ onMounted(() => {
 });
 
 function initPlayer(vm: Player) {
+  vm.setEventsMiddleware
   vm.once("play", () => {
     window.gtag &&
       window.gtag("event", "playVideo", {
@@ -109,7 +114,7 @@ function callPhone() {
   display: block;
   min-height: 100vh;
   width: 100%;
-  height: 1224px;
+  height: 1251px;
   /* 兼容 iOS < 11.2 */
   padding-mid: constant(safe-area-inset-mid);
   /* 兼容 iOS >= 11.2 */
@@ -134,7 +139,7 @@ function callPhone() {
 .main .top {
   position: relative;
   width: 100%;
-  height: 360px;
+  height: 384px;
   background-image: url("../../assets/top_mask.png");
   background-size: 100% 100%;
   overflow: auto;
@@ -142,9 +147,9 @@ function callPhone() {
 
 .mse-box {
   box-sizing: content-box;
-  width: 150px;
+  width: 174px;
   padding: 2px;
-  margin: 45px auto 0 auto;
+  margin: 48px auto 0 auto;
   background-color: #f9daac;
   border-radius: 4px;
 }
@@ -152,15 +157,15 @@ function callPhone() {
 #mse {
   margin: 0;
   padding: 0;
-  width: 150px;
-  height: 150px;
+  width: 174px;
+  height: 174px;
   border-radius: 4px;
 }
 
 .top .topText1,
 .topText3 {
   display: block;
-  margin-top: 9px;
+  margin-top: 10px;
   color: #a35411;
   font-size: 12px;
   line-height: 18px;
@@ -260,7 +265,7 @@ function callPhone() {
 }
 
 #video {
-  width: 290px;
+  width: 289px;
   height: 163px;
   border-radius: 4px;
   z-index: 1;
@@ -287,7 +292,7 @@ function callPhone() {
 }
 
 #video2 {
-  width: 290px;
+  width: 289px;
   height: 163px;
   border-radius: 4px;
   z-index: 1;
@@ -296,7 +301,7 @@ function callPhone() {
 
 .pic {
   position: absolute;
-  top: 307px;
+  top: 333px;
   right: 0;
   width: 62px;
   height: 147px;
