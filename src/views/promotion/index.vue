@@ -89,7 +89,7 @@ function callPhone() {
       </div>
       <p class="text-box">
         <span class="text1">如果您也需要</span>
-        <span class="text2">&nbsp;更全方位的专属人生回顾《纪录片》定制，用于日常悼念及追悼会播放，可添加工作人员微信或拨打电话：</span>
+        <span class="text2">&nbsp;更全方位的专属人生回顾《纪录片》定制，做为数字遗产保留，可添加工作人员微信或拨打电话：</span>
         <span class="text3" @click="callPhone">181-5550-2266</span>
       </p>
       <p class="text4">扫码联系</p>
