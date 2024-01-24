@@ -27,8 +27,8 @@ onMounted(() => {
   new Player({
     id: "video",
     url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4 ",
-    height: "42.9vw",
-    width: "77.33vw",
+    height: "43.46666vw",
+    width: "77.066666vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     fitVideoSize: "fixWidth",
@@ -42,8 +42,8 @@ onMounted(() => {
   new Player({
     id: "video2",
     url: "http://ceremony.yauma.cn/resource/20240001.mp4",
-    height: "42.9vw",
-    width: "77.33vw",
+    height: "43.46666vw",
+    width: "77.066666vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     "x5-video-player-fullscreen": true,
@@ -261,7 +261,7 @@ function callPhone() {
 
 .video-box {
   box-sizing: content-box;
-  width: 290px;
+  width: 289px;
   margin: 40px auto 0 auto;
   padding: 2px;
   background-color: #f9daac;
@@ -287,7 +287,7 @@ function callPhone() {
 
 .bottom-video {
   box-sizing: content-box;
-  width: 290px;
+  width: 289px;
   margin: 40px auto 0 auto;
   padding: 2px;
   background-color: #f9daac;
