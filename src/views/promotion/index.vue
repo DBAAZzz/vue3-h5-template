@@ -16,10 +16,8 @@ onMounted(() => {
     width: "46.4vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
-    "x5-video-player-fullscreen": true,
-    "x5-video-orientation": "portraint",
-    fitVideoSize: "fixWidth",
-    playsinline: false,
+    // fitVideoSize: "fixWidth",
+    playsinline: true,
     ignores: ["time", "play", "volume", "progress"],
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
@@ -27,29 +25,24 @@ onMounted(() => {
   new Player({
     id: "video",
     url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4 ",
-    height: "43.46666vw",
+    height: "43.35vw",
     width: "77.066666vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
-    fitVideoSize: "fixWidth",
-    // videoFillMode: '',
-    "x5-video-player-fullscreen": true,
-    "x5-video-orientation": "portraint",
-    playsinline: false,
+    // fitVideoSize: "fixWidth",
+    playsinline: true,
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
   });
   new Player({
     id: "video2",
     url: "http://ceremony.yauma.cn/resource/20240001.mp4",
-    height: "43.46666vw",
+    height: "43.35vw",
     width: "77.066666vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
-    "x5-video-player-fullscreen": true,
-    "x5-video-orientation": "portraint",
-    fitVideoSize: "fixWidth",
-    playsinline: false,
+    // fitVideoSize: "fixWidth",
+    playsinline: true,
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
   });
@@ -89,9 +82,7 @@ function callPhone() {
       </div>
       <p class="text-box">
         <span class="text1">如果您也需要</span>
-        <span class="text2"
-          >&nbsp;更全方位的专属人生回顾《纪录片》定制，做为数字遗产保留，可添加工作人员微信或拨打电话：</span
-        >
+        <span class="text2">&nbsp;更全方位的专属人生回顾《纪录片》定制，做为数字遗产保留，可添加工作人员微信或拨打电话：</span>
         <span class="text3" @click="callPhone">181-5550-2266</span>
       </p>
       <p class="text4">扫码联系</p>
@@ -103,9 +94,7 @@ function callPhone() {
       </div>
       <p class="text-box">
         <span class="text1">如果您也需要</span>
-        <span class="text2"
-          >&nbsp;再次与亲人对话，让生命延续，请联系工作人员定制数字生命《永生版》，将他/她尊贵的品德，伟大的精神，以及对您的爱永远传承下去。</span
-        >
+        <span class="text2">&nbsp;再次与亲人对话，让生命延续，请联系工作人员定制数字生命《永生版》，将他/她尊贵的品德，伟大的精神，以及对您的爱永远传承下去。</span>
       </p>
     </div>
     <img class="pic" alt="code" src="~@/assets/pic1.png" />
