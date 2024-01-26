@@ -4,12 +4,14 @@ import { useRoute } from "vue-router";
 import Player from "xgplayer";
 import "xgplayer/dist/index.min.css";
 
-let player: Player | null = null;
+let player1: Player | null = null,
+  player2: Player | null = null,
+  player3: Player | null = null;
 const { UserID } = useRoute().query;
 const id = UserID ? (UserID as string).split("_")[1] : "1706003594744";
 
 onMounted(() => {
-  player = new Player({
+  player1 = new Player({
     id: "mse",
     url: `http://ceremony.yauma.cn/U1/videos/${id}.mp4`,
     height: "46.4vw",
@@ -22,7 +24,7 @@ onMounted(() => {
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
   });
-  new Player({
+  player2 = new Player({
     id: "video",
     url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4 ",
     height: "43.35vw",
@@ -34,7 +36,7 @@ onMounted(() => {
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
   });
-  new Player({
+  player3 = new Player({
     id: "video2",
     url: "http://ceremony.yauma.cn/resource/20240001.mp4",
     height: "43.35vw",
@@ -46,18 +48,16 @@ onMounted(() => {
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
   });
-  initPlayer(player);
+  initPlayer(player1, '推广视频');
+  initPlayer(player2, '追悼视频');
+  initPlayer(player3, '永生视频');
 });
 
-function initPlayer(vm: Player) {
+function initPlayer(vm: Player, eventName: string) {
   vm.setEventsMiddleware;
   vm.once("play", () => {
     window.gtag &&
-      window.gtag("event", "playVideo", {
-        event_category: "Click",
-        event_label: "视频点击",
-        value: 500
-      });
+      window.gtag("event", eventName);
   });
 }
 
