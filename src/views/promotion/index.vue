@@ -20,7 +20,7 @@ onMounted(() => {
     "x5-video-orientation": "portraint",
     fitVideoSize: "fixWidth",
     playsinline: false,
-    ignores: ["time", "play", "volume", "progress", "replay"],
+    ignores: ["time", "play", "volume", "progress"],
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
   });
