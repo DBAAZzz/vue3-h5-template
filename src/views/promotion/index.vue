@@ -62,7 +62,7 @@ function initPlayer(vm: Player, eventName: string) {
 }
 
 function callPhone() {
-  window.location.href = "tel:18155502266";
+  window.location.href = "tel:18680389858";
 }
 </script>
 
@@ -83,10 +83,10 @@ function callPhone() {
       <p class="text-box">
         <span class="text1">如果您也需要</span>
         <span class="text2">&nbsp;更全方位的专属人生回顾《纪录片》定制，做为数字遗产保留，可添加工作人员微信或拨打电话：</span>
-        <span class="text3" @click="callPhone">181-5550-2266</span>
+        <span class="text3" @click="callPhone">186-8038-9858</span>
       </p>
       <p class="text4">扫码联系</p>
-      <img class="code" alt="code" src="~@/assets/code.png" />
+      <img class="code" alt="code" src="~@/assets/code2.png" />
     </div>
     <div class="bottom">
       <div class="bottom-video">
@@ -122,7 +122,7 @@ function callPhone() {
   position: absolute;
   bottom: 32px;
   width: 100%;
-  content: "— 当涂县殡仪馆 —";
+  content: "— 元谟人工智能数字生命技术制作 —";
   font-size: 15px;
   line-height: 18px;
   text-align: center;
@@ -244,8 +244,10 @@ function callPhone() {
   display: block;
   margin: 0 auto;
   margin-top: 8px;
-  width: 102px;
-  height: 102px;
+  width: 98px;
+  height: 98px;
+  border: 3px solid #C99200;
+  border-radius: 4px;
 }
 
 .video-box {
