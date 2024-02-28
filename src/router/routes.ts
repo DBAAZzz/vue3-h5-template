@@ -1,6 +1,7 @@
 import Layout from "@/layout/index.vue";
 import type { RouteRecordRaw } from "vue-router";
-import Demo from "@/views/demo/index.vue";
+import AdvertMobile from "@/views/advertMobile/index.vue";
+import AdvertPC from "@/views/advertPC/index.vue";
 
 const routes: Array<RouteRecordRaw> = [
   // {
@@ -42,6 +43,22 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/promotion/index.vue"),
     meta: {
       title: "亲人的回声"
+    }
+  },
+  {
+    path: "/m/advert",
+    name: "AdvertMobile",
+    component: AdvertMobile,
+    meta: {
+      title: "元谟数字生命"
+    }
+  },
+  {
+    path: "/advert",
+    name: "AdvertPC",
+    component: AdvertPC,
+    meta: {
+      title: "元谟数字生命"
     }
   }
 ];

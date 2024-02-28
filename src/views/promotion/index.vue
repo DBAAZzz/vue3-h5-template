@@ -14,8 +14,8 @@ onMounted(() => {
   player1 = new Player({
     id: "mse",
     url: `http://ceremony.yauma.cn/U1/videos/${id}.mp4`,
-    height: "46.4vw",
-    width: "46.4vw",
+    // height: "46.4vw",
+    // width: "46.4vw",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     // fitVideoSize: "fixWidth",
@@ -26,7 +26,7 @@ onMounted(() => {
   });
   player2 = new Player({
     id: "video",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4 ",
+    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
     height: "43.35vw",
     width: "77.066666vw",
     playbackRate: [1],
@@ -48,16 +48,15 @@ onMounted(() => {
     controlsList: ["noremoteplayback", "nodownload"],
     videoInit: true
   });
-  initPlayer(player1, '推广视频');
-  initPlayer(player2, '追悼视频');
-  initPlayer(player3, '永生视频');
+  initPlayer(player1, "推广视频");
+  initPlayer(player2, "追悼视频");
+  initPlayer(player3, "永生视频");
 });
 
 function initPlayer(vm: Player, eventName: string) {
   vm.setEventsMiddleware;
   vm.once("play", () => {
-    window.gtag &&
-      window.gtag("event", eventName);
+    window.gtag && window.gtag("event", eventName);
   });
 }
 
@@ -82,7 +81,9 @@ function callPhone() {
       </div>
       <p class="text-box">
         <span class="text1">如果您也需要</span>
-        <span class="text2">&nbsp;更全方位的专属人生回顾《纪录片》定制，做为数字遗产保留，可添加工作人员微信或拨打电话：</span>
+        <span class="text2"
+          >&nbsp;更全方位的专属人生回顾《纪录片》定制，做为数字遗产保留，可添加工作人员微信或拨打电话：</span
+        >
         <span class="text3" @click="callPhone">186-8038-9858</span>
       </p>
       <p class="text4">扫码联系</p>
@@ -94,7 +95,9 @@ function callPhone() {
       </div>
       <p class="text-box">
         <span class="text1">如果您也需要</span>
-        <span class="text2">&nbsp;再次与亲人对话，让生命延续，请联系工作人员定制数字生命《永生版》，将他/她尊贵的品德，伟大的精神，以及对您的爱永远传承下去。</span>
+        <span class="text2"
+          >&nbsp;再次与亲人对话，让生命延续，请联系工作人员定制数字生命《永生版》，将他/她尊贵的品德，伟大的精神，以及对您的爱永远传承下去。</span
+        >
       </p>
     </div>
     <img class="pic" alt="code" src="~@/assets/pic1.png" />
@@ -246,7 +249,7 @@ function callPhone() {
   margin-top: 8px;
   width: 98px;
   height: 98px;
-  border: 3px solid #C99200;
+  border: 3px solid #c99200;
   border-radius: 4px;
 }
 

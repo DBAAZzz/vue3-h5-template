@@ -7,6 +7,7 @@ module.exports = {
       minPixelValue: 1, // 最小的转换数值
       unitPrecision: 2, // 转化精度，转换后保留位数
       selectorBlackList: ["xg"], // xgplayer插件不转换
+      exclude: [/advertPC/]
     },
     autoprefixer: {
       overrideBrowserslist: ["Android >= 4.0", "iOS >= 7"]
