@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import type { SwipeInstance } from "vant";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import Player from "xgplayer";
 import MyPlayIcon from "../../assets/advert_play.png";
 import "xgplayer/dist/index.min.css";
 
 let swipeRef1 = ref<SwipeInstance>();
 let swipeRef2 = ref<SwipeInstance>();
+let showButton = ref<boolean>(false);
+let swipeIndex1 = ref(0);
+let swipeIndex2 = ref(0);
+
 let player1: Player | null = null,
   player2: Player | null = null,
   player3: Player | null = null,
@@ -118,6 +122,19 @@ onMounted(() => {
 
 const swipe1Prev = () => {
   swipeRef1.value?.prev();
+  if (swipeIndex1.value > 0) {
+    swipeIndex1.value--;
+  }
+  player1?.pause();
+  player2?.pause();
+  player3?.pause();
+};
+
+const swipe1Next = () => {
+  swipeRef1.value?.next();
+  if (swipeIndex1.value < 2) {
+    swipeIndex1.value++;
+  }
   player1?.pause();
   player2?.pause();
   player3?.pause();
@@ -125,20 +142,19 @@ const swipe1Prev = () => {
 
 const swipe2Prev = () => {
   swipeRef2.value?.prev();
+  if (swipeIndex2.value > 0) {
+    swipeIndex2.value--;
+  }
   player4?.pause();
   player5?.pause();
   player6?.pause();
 };
 
-const swipe1Next = () => {
-  swipeRef1.value?.next();
-  player1?.pause();
-  player2?.pause();
-  player3?.pause();
-};
-
 const swipe2Next = () => {
   swipeRef2.value?.next();
+  if (swipeIndex2.value < 2) {
+    swipeIndex2.value++;
+  }
   player4?.pause();
   player5?.pause();
   player6?.pause();
@@ -147,10 +163,21 @@ const swipe2Next = () => {
 function callPhone() {
   window.location.href = "tel:19925388058";
 }
+
+const scrolling = (e: any) => {
+  const clientHeight = e.target.clientHeight;
+  const scrollHeight = e.target.scrollHeight;
+  const scrollTop = e.target.scrollTop;
+  if (scrollTop > 200) {
+    showButton.value = true;
+  } else {
+    showButton.value = false;
+  }
+};
 </script>
 
 <template>
-  <div class="main">
+  <div class="main" @scroll="scrolling">
     <div class="top"></div>
     <div class="mid">
       <div class="text">
@@ -168,6 +195,7 @@ function callPhone() {
             ref="swipeRef1"
             :loop="false"
             :touchable="false"
+            :show-indicators="false"
             indicator-color="#fff"
           >
             <van-swipe-item
@@ -180,6 +208,15 @@ function callPhone() {
               ><div id="video3" class="video"></div
             ></van-swipe-item>
           </van-swipe>
+          <div class="indicator">
+            <div
+              :class="{
+                'indicator-item': true,
+                'indicator-item__active': index == swipeIndex1
+              }"
+              v-for="(item, index) in 3"
+            ></div>
+          </div>
         </div>
         <img
           class="left-icon"
@@ -194,6 +231,7 @@ function callPhone() {
           src="~@/assets/advert_right.png"
         />
       </div>
+
       <div class="video-card2">
         <p class="video-label">
           <span>限时特惠：</span>
@@ -205,6 +243,7 @@ function callPhone() {
             ref="swipeRef2"
             :loop="false"
             :touchable="false"
+            :show-indicators="false"
             indicator-color="#fff"
           >
             <van-swipe-item
@@ -217,6 +256,15 @@ function callPhone() {
               ><div id="video6" class="video"></div
             ></van-swipe-item>
           </van-swipe>
+          <div class="indicator">
+            <div
+              :class="{
+                'indicator-item': true,
+                'indicator-item__active': index == swipeIndex2
+              }"
+              v-for="(item, index) in 3"
+            ></div>
+          </div>
         </div>
         <img
           class="left-icon"
@@ -253,21 +301,33 @@ function callPhone() {
         />
       </div>
       <img class="qrcode" alt="code" src="~@/assets/advert_qrcode.png" />
-    </div>
-    <div class="fixed-button">
-      <div class="link_bg" @click="callPhone()">
-        <img class="link" alt="code" src="~@/assets/advert_link.png" />
+      <div class="beian">
+        <p>©2022-2023 Copyright by Yauma All rights reserved</p>
+        <p>深圳前海路航链动科技有限公司</p>
+        <p>粤ICP备2023052651号</p>
+        <p>粤公网安备44030502010444号</p>
       </div>
     </div>
+    <transition name="button">
+      <div class="fixed-button" v-if="showButton">
+        <div class="link_bg" @click="callPhone()">
+          <img class="link" alt="code" src="~@/assets/advert_link.png" />
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .main {
+  height: 100vh;
   /* 兼容 iOS < 11.2 */
-  padding-mid: constant(safe-area-inset-mid);
+  padding-mid: calc(constant(safe-area-inset-mid) + 56px);
   /* 兼容 iOS >= 11.2 */
-  padding-mid: env(safe-area-inset-mid);
+  padding-mid: calc(env(safe-area-inset-mid) + 56px);
+  padding-bottom: 56px;
+  scroll-behavior: smooth;
+  overflow-y: auto;
 }
 .top {
   position: relative;
@@ -403,6 +463,22 @@ function callPhone() {
     width: 22px;
     height: 22px;
   }
+  .indicator {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+    &-item {
+      margin-left: 3px;
+      width: 4px;
+      height: 4px;
+      background-color: #fdf8e3;
+      border-radius: 2px;
+      transition: width 0.5s;
+    }
+    &-item__active {
+      width: 24px;
+    }
+  }
 }
 .bottom {
   position: relative;
@@ -416,7 +492,7 @@ function callPhone() {
   overflow: auto;
   &::after {
     position: absolute;
-    bottom: 84px;
+    bottom: 108px;
     width: 100%;
     content: "—— 中国殡葬服务专业机构 ——";
     font-size: 11px;
@@ -446,6 +522,15 @@ function callPhone() {
     width: 105px;
     height: 105px;
   }
+  .beian {
+    margin-top: 67px;
+    > p {
+      font-size: 11px;
+      line-height: 15px;
+      color: #d8c8a0;
+      text-align: center;
+    }
+  }
 }
 .fixed-button {
   position: fixed;
@@ -456,6 +541,7 @@ function callPhone() {
   background-image: url("../../assets/advert_bottom_bg.png");
   background-size: 100% 100%;
   z-index: 999;
+  transition: all 0.4s;
   .link_bg {
     display: flex;
     justify-content: center;
@@ -471,5 +557,20 @@ function callPhone() {
       height: 22px;
     }
   }
+}
+
+.button-enter-from,
+.button-leave-to {
+  opacity: 0;
+}
+
+.button-enter-to,
+.button-leave-from {
+  opacity: 1;
+}
+
+.button-enter-active,
+.button-leave-active {
+  transition: opacity 0.8s ease;
 }
 </style>
