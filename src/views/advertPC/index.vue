@@ -11,6 +11,8 @@ let player1: Player | null = null,
 const activeIndex = ref<number>(0);
 const activeNav = ref<boolean>(false);
 const isExpand = ref<boolean>(true);
+const activeCard1 = ref<number>(1);
+const activeCard2 = ref<number>(1);
 const section1Ref = ref<HTMLElement | null>(null);
 const section2Ref = ref<HTMLElement | null>(null);
 const section3Ref = ref<HTMLElement | null>(null);
@@ -30,9 +32,10 @@ onMounted(() => {
 
   player1 = new Player({
     id: "video1",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/1_1.webm",
     width: "785px",
     height: "442px",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/pc1_1.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -44,9 +47,10 @@ onMounted(() => {
   });
   player2 = new Player({
     id: "video2",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/2_1.webm",
     width: "785px",
     height: "442px",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/pc2_1.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -58,9 +62,10 @@ onMounted(() => {
   });
   player3 = new Player({
     id: "video3",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/3_1.webm",
     width: "785px",
     height: "442px",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/pc3_1.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -98,6 +103,21 @@ const scrollToAnchor = (index: number) => {
 };
 
 const scrolling = (e: any) => {
+  if (document.documentElement.scrollTop <= 500) {
+    activeIndex.value = 0;
+  }
+  if (document.documentElement.scrollTop >= 900) {
+    activeIndex.value = 1;
+  }
+  if (document.documentElement.scrollTop >= 1600) {
+    activeIndex.value = 2;
+  }
+  if (document.documentElement.scrollTop >= 2400) {
+    activeIndex.value = 3;
+  }
+  if (document.documentElement.scrollTop >= 3000) {
+    activeIndex.value = 4;
+  }
   if (document.documentElement.scrollTop > 400) {
     activeNav.value = true;
   } else {
@@ -105,26 +125,27 @@ const scrolling = (e: any) => {
   }
 };
 
-const switchVideoURL = async (url: string, index: number) => {
+const switchVideoURL = async (url: string, index: number, activeId: number) => {
   switch (index) {
     case 1:
+      activeCard1.value = activeId;
       player1?.pause();
       player1?.switchURL(url);
       setTimeout(() => {
         player1?.play();
-      }, 200);
+      }, 1000);
       break;
     case 2:
+      activeCard2.value = activeId;
       player2?.pause();
       player2?.switchURL(url);
       setTimeout(() => {
         player2?.play();
-      }, 200);
+      }, 1000);
       break;
     default:
       break;
   }
-  // console.log("url", url);
 };
 </script>
 
@@ -147,9 +168,16 @@ const switchVideoURL = async (url: string, index: number) => {
       </div>
       <div :class="{ 'fix-code': true, 'fix-code__expand': isExpand }">
         <img
+          v-show="isExpand"
           @click="isExpand = !isExpand"
           class="expand"
           src="~@/assets/pc/pc_expand.png"
+        />
+        <img
+          v-show="!isExpand"
+          @click="isExpand = !isExpand"
+          class="expand"
+          src="~@/assets/pc/pc_noexpand.png"
         />
         <img class="code" src="~@/assets/pc/pc_fixcode.png" />
       </div>
@@ -169,16 +197,45 @@ const switchVideoURL = async (url: string, index: number) => {
           <div class="renderVideo" id="video1"></div>
         </div>
         <div class="card-right">
-          <div
-            class="video-item"
+          <img
+            :class="`video-item ${
+              activeCard1 == 1 ? 'video-item__active' : ''
+            } `"
+            src="https://ceremony.yauma.cn/intro/ad/image/pc1_1.png"
             @click="
               switchVideoURL(
-                'http://ceremony.yauma.cn/resource/20240001.mp4',
+                'https://ceremony.yauma.cn/intro/ad/video/1_1.webm',
+                1,
                 1
               )
             "
-            v-for="item in 3"
-          ></div>
+          />
+          <img
+            :class="`video-item ${
+              activeCard1 == 2 ? 'video-item__active' : ''
+            } `"
+            src="https://ceremony.yauma.cn/intro/ad/image/pc1_2.png"
+            @click="
+              switchVideoURL(
+                'https://ceremony.yauma.cn/intro/ad/video/1_2.webm',
+                1,
+                2
+              )
+            "
+          />
+          <img
+            :class="`video-item ${
+              activeCard1 == 3 ? 'video-item__active' : ''
+            } `"
+            src="https://ceremony.yauma.cn/intro/ad/image/pc1_3.png"
+            @click="
+              switchVideoURL(
+                'https://ceremony.yauma.cn/intro/ad/video/1_3.webm',
+                1,
+                3
+              )
+            "
+          />
         </div>
       </div>
       <div class="card2" id="section3" ref="section3Ref">
@@ -191,16 +248,45 @@ const switchVideoURL = async (url: string, index: number) => {
           <div class="renderVideo" id="video2"></div>
         </div>
         <div class="card-right">
-          <div
-            class="video-item"
+          <img
+            :class="`video-item ${
+              activeCard2 == 1 ? 'video-item__active' : ''
+            } `"
+            src="https://ceremony.yauma.cn/intro/ad/image/pc2_1.png"
             @click="
               switchVideoURL(
-                'http://ceremony.yauma.cn/resource/20240001.mp4',
+                'https://ceremony.yauma.cn/intro/ad/video/2_1.webm',
+                2,
+                1
+              )
+            "
+          />
+          <img
+            :class="`video-item ${
+              activeCard2 == 2 ? 'video-item__active' : ''
+            } `"
+            src="https://ceremony.yauma.cn/intro/ad/image/pc2_2.png"
+            @click="
+              switchVideoURL(
+                'https://ceremony.yauma.cn/intro/ad/video/2_2.webm',
+                2,
                 2
               )
             "
-            v-for="item in 3"
-          ></div>
+          />
+          <img
+            :class="`video-item ${
+              activeCard2 == 3 ? 'video-item__active' : ''
+            } `"
+            src="https://ceremony.yauma.cn/intro/ad/image/pc2_3.png"
+            @click="
+              switchVideoURL(
+                'https://ceremony.yauma.cn/intro/ad/video/2_3.webm',
+                2,
+                3
+              )
+            "
+          />
         </div>
       </div>
       <div class="card3" id="section4" ref="section4Ref">
@@ -214,7 +300,7 @@ const switchVideoURL = async (url: string, index: number) => {
       <img class="title2" src="~@/assets/pc/pc_title2.png" />
       <div class="phone" id="section5" ref="section5Ref">
         <img class="icon1" src="~@/assets/pc/pc_advert_phoneicon.png" />
-        <img class="icon2" src="~@/assets/pc/pc_advert_phone.png" />
+        <span class="phoneNumber">199-2538-8058</span>
       </div>
       <img class="qrcode" src="~@/assets/pc/pc_qrcode.png" />
       <p class="text3">
@@ -241,10 +327,12 @@ const switchVideoURL = async (url: string, index: number) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 1920px;
+    width: 100%;
     height: 4342px;
-    background-image: url("../../assets/pc/bg_1.webp");
-    background-size: 1920px 4342px;
+    min-width: 1200px;
+    background: url("https://ceremony.yauma.cn/intro/ad/image/bg/1.webp") center
+      top no-repeat;
+    background-size: cover;
 
     .fix-code {
       position: fixed;
@@ -272,11 +360,12 @@ const switchVideoURL = async (url: string, index: number) => {
 
     .nav {
       position: fixed;
-      width: 1920px;
+      left: 0;
+      right: 0;
       height: 68px;
       background-color: rgba(37, 37, 37, 0.5);
       color: #fff;
-      z-index: 1;
+      z-index: 999;
 
       .nav-box {
         position: absolute;
@@ -313,7 +402,7 @@ const switchVideoURL = async (url: string, index: number) => {
     }
     .top {
       display: block;
-      margin-top: 43px;
+      margin-top: 111px;
       width: 900px;
       height: 397px;
       background-image: url("../../assets/pc/top_text.png");
@@ -340,7 +429,7 @@ const switchVideoURL = async (url: string, index: number) => {
       margin-top: 80px;
       width: 1200px;
       height: 640px;
-      background-image: url("../../assets/pc/pc_movie1.png");
+      background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/pc_movie1.png");
       background-size: 1200px 640px;
       > p {
         position: absolute;
@@ -381,7 +470,11 @@ const switchVideoURL = async (url: string, index: number) => {
         .video-item {
           width: 265px;
           height: 149px;
-          background-color: yellow;
+          cursor: pointer;
+          &__active {
+            border: 2px solid #f3edd9;
+            border-radius: 4px;
+          }
           &:not(:last-child) {
             margin-bottom: 15px;
           }
@@ -395,7 +488,7 @@ const switchVideoURL = async (url: string, index: number) => {
       margin-top: 80px;
       width: 1200px;
       height: 640px;
-      background-image: url("../../assets/pc/pc_movie2.png");
+      background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/pc_movie2.png");
       background-size: 1200px 640px;
       > p {
         position: absolute;
@@ -436,7 +529,11 @@ const switchVideoURL = async (url: string, index: number) => {
         .video-item {
           width: 265px;
           height: 149px;
-          background-color: yellow;
+          cursor: pointer;
+          &__active {
+            border: 2px solid #f3edd9;
+            border-radius: 4px;
+          }
           &:not(:last-child) {
             margin-bottom: 15px;
           }
@@ -449,7 +546,7 @@ const switchVideoURL = async (url: string, index: number) => {
       margin-top: 80px;
       width: 1200px;
       height: 640px;
-      background-image: url("../../assets/pc/pc_movie3.png");
+      background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/pc_movie3.png");
       background-size: 1200px 640px;
       > p {
         position: absolute;
@@ -497,11 +594,12 @@ const switchVideoURL = async (url: string, index: number) => {
         width: 66px;
         height: 66px;
       }
-      .icon2 {
+      .phoneNumber {
         display: block;
         margin-left: 25px;
-        width: 365px;
-        height: 41px;
+        color: #4da6ff;
+        font-size: 56px;
+        font-weight: bold;
       }
     }
     .qrcode {
@@ -523,6 +621,13 @@ const switchVideoURL = async (url: string, index: number) => {
         color: #d8c8a0;
         text-align: center;
       }
+    }
+  }
+  @media (min-width: 2560px) {
+    .main {
+      background: url("https://ceremony.yauma.cn/intro/ad/image/bg/2.webp")
+        center top no-repeat;
+      background-size: cover;
     }
   }
 }

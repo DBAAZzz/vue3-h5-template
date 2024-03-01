@@ -50,7 +50,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "AdvertMobile",
     component: AdvertMobile,
     meta: {
-      title: "元谟数字生命"
+      title: "元谟人工智能《逝者纪录片》"
     }
   },
   {
@@ -58,7 +58,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "AdvertPC",
     component: AdvertPC,
     meta: {
-      title: "元谟数字生命"
+      title: "元谟人工智能《逝者纪录片》"
     }
   }
 ];

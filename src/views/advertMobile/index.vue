@@ -8,6 +8,8 @@ import "xgplayer/dist/index.min.css";
 let swipeRef1 = ref<SwipeInstance>();
 let swipeRef2 = ref<SwipeInstance>();
 let showButton = ref<boolean>(false);
+let swipe1Autoplay = ref<number>(2000);
+let swipe2Autoplay = ref<number>(2000);
 let swipeIndex1 = ref(0);
 let swipeIndex2 = ref(0);
 
@@ -21,9 +23,10 @@ let player1: Player | null = null,
 onMounted(() => {
   player1 = new Player({
     id: "video1",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/1_1.mp4",
     width: "66.67vw",
     height: "37.5vw",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/1_1.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -35,9 +38,10 @@ onMounted(() => {
   });
   player2 = new Player({
     id: "video2",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/1_2.mp4",
     width: "66.67vw",
     height: "37.5vw",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/1_2.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -49,9 +53,10 @@ onMounted(() => {
   });
   player3 = new Player({
     id: "video3",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/1_3.mp4",
     width: "66.67vw",
     height: "37.5vw",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/1_3.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -63,9 +68,10 @@ onMounted(() => {
   });
   player4 = new Player({
     id: "video4",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/2_1.mp4",
     width: "66.67vw",
     height: "37.5vw",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/2_1.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -77,9 +83,10 @@ onMounted(() => {
   });
   player5 = new Player({
     id: "video5",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/2_2.mp4",
     width: "66.67vw",
     height: "37.5vw",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/2_2.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -91,9 +98,10 @@ onMounted(() => {
   });
   player6 = new Player({
     id: "video6",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/2_3.mp4",
     width: "66.67vw",
     height: "37.5vw",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/2_3.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -106,9 +114,10 @@ onMounted(() => {
 
   new Player({
     id: "lastVideo",
-    url: "http://ceremony.yauma.cn/resource/zx1.24v2.mp4",
+    url: "https://ceremony.yauma.cn/intro/ad/video/3_1.mp4",
     width: "66.67vw",
     height: "37.5vw",
+    poster: "https://ceremony.yauma.cn/intro/ad/image/3_1.png",
     playbackRate: [1],
     defaultPlaybackRate: 1,
     playsinline: true,
@@ -118,46 +127,101 @@ onMounted(() => {
       startPlay: MyPlayIcon
     }
   });
+  player1.on("play", () => {
+    swipe1Autoplay.value = 0;
+  });
+  player2.on("play", () => {
+    swipe1Autoplay.value = 0;
+  });
+  player3.on("play", () => {
+    swipe1Autoplay.value = 0;
+  });
+
+  player1.on("pause", () => {
+    swipe1Autoplay.value = 2000;
+  });
+  player2.on("pause", () => {
+    swipe1Autoplay.value = 2000;
+  });
+  player3.on("pause", () => {
+    swipe1Autoplay.value = 2000;
+  });
+
+  player1.on("ended", () => {
+    swipe1Autoplay.value = 2000;
+  });
+  player2.on("ended", () => {
+    swipe1Autoplay.value = 2000;
+  });
+  player3.on("ended", () => {
+    swipe1Autoplay.value = 2000;
+  });
+
+  player4.on("play", () => {
+    swipe2Autoplay.value = 0;
+  });
+  player5.on("play", () => {
+    swipe2Autoplay.value = 0;
+  });
+  player6.on("play", () => {
+    swipe2Autoplay.value = 0;
+  });
+
+  player4.on("pause", () => {
+    swipe2Autoplay.value = 2000;
+  });
+  player5.on("pause", () => {
+    swipe2Autoplay.value = 2000;
+  });
+  player6.on("pause", () => {
+    swipe2Autoplay.value = 2000;
+  });
+
+  player4.on("ended", () => {
+    swipe2Autoplay.value = 2000;
+  });
+  player5.on("ended", () => {
+    swipe2Autoplay.value = 2000;
+  });
+  player6.on("ended", () => {
+    swipe2Autoplay.value = 2000;
+  });
 });
 
 const swipe1Prev = () => {
-  swipeRef1.value?.prev();
-  if (swipeIndex1.value > 0) {
-    swipeIndex1.value--;
-  }
+  if (swipeIndex1.value != 0) swipeRef1.value?.prev();
   player1?.pause();
   player2?.pause();
   player3?.pause();
 };
 
 const swipe1Next = () => {
-  swipeRef1.value?.next();
-  if (swipeIndex1.value < 2) {
-    swipeIndex1.value++;
-  }
+  if (swipeIndex1.value < 2) swipeRef1.value?.next();
   player1?.pause();
   player2?.pause();
   player3?.pause();
 };
 
 const swipe2Prev = () => {
-  swipeRef2.value?.prev();
-  if (swipeIndex2.value > 0) {
-    swipeIndex2.value--;
-  }
+  if (swipeIndex2.value != 0) swipeRef2.value?.prev();
   player4?.pause();
   player5?.pause();
   player6?.pause();
 };
 
 const swipe2Next = () => {
-  swipeRef2.value?.next();
-  if (swipeIndex2.value < 2) {
-    swipeIndex2.value++;
-  }
+  if (swipeIndex2.value < 2) swipeRef1.value?.next();
   player4?.pause();
   player5?.pause();
   player6?.pause();
+};
+
+const swipe1Change = (index: number) => {
+  swipeIndex1.value = index;
+};
+
+const swipe2Change = (index: number) => {
+  swipeIndex2.value = index;
 };
 
 function callPhone() {
@@ -193,10 +257,12 @@ const scrolling = (e: any) => {
         <div class="swipe-box">
           <van-swipe
             ref="swipeRef1"
-            :loop="false"
+            :loop="true"
+            :autoplay="swipe1Autoplay"
             :touchable="false"
             :show-indicators="false"
             indicator-color="#fff"
+            @change="swipe1Change"
           >
             <van-swipe-item
               ><div id="video1" class="video"></div
@@ -241,10 +307,12 @@ const scrolling = (e: any) => {
         <div class="swipe-box">
           <van-swipe
             ref="swipeRef2"
-            :loop="false"
+            :loop="true"
+            :autoplay="swipe2Autoplay"
             :touchable="false"
             :show-indicators="false"
             indicator-color="#fff"
+            @change="swipe2Change"
           >
             <van-swipe-item
               ><div id="video4" class="video"></div
@@ -293,12 +361,7 @@ const scrolling = (e: any) => {
     <div class="bottom">
       <div class="phone">
         <img class="icon1" alt="code" src="~@/assets/advert_phoneicon.png" />
-        <img
-          class="icon2"
-          @click="callPhone()"
-          alt="code"
-          src="~@/assets/advert_phone.png"
-        />
+        <span class="phoneNumber" @click="callPhone()">199-2538-8058</span>
       </div>
       <img class="qrcode" alt="code" src="~@/assets/advert_qrcode.png" />
       <div class="beian">
@@ -334,7 +397,7 @@ const scrolling = (e: any) => {
   display: block;
   width: 100%;
   height: 315px;
-  background-image: url("../../assets/advert_bg1.png");
+  background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/advert_bg1.png");
   background-size: 100% 100%;
 }
 .mid {
@@ -344,7 +407,7 @@ const scrolling = (e: any) => {
   align-items: center;
   width: 100%;
   height: 774px;
-  background-image: url("../../assets/advert_bg2.png");
+  background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/advert_bg2.png");
   background-size: 100% 100%;
 
   .swipe-box {
@@ -378,7 +441,7 @@ const scrolling = (e: any) => {
     margin-top: 21px;
     width: 319px;
     height: 223px;
-    background-image: url("../../assets/advert_movie1.png");
+    background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/advert_movie1.png");
     background-size: 100% 100%;
   }
   .video-card2 {
@@ -386,7 +449,7 @@ const scrolling = (e: any) => {
     margin-top: 16px;
     width: 319px;
     height: 223px;
-    background-image: url("../../assets/advert_movie2.png");
+    background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/advert_movie2.png");
     background-size: 100% 100%;
   }
   .video-card3 {
@@ -394,7 +457,7 @@ const scrolling = (e: any) => {
     margin-top: 16px;
     width: 319px;
     height: 223px;
-    background-image: url("../../assets/advert_movie3.png");
+    background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/advert_movie3.png");
     background-size: 100% 100%;
   }
   .video-label {
@@ -487,7 +550,7 @@ const scrolling = (e: any) => {
   align-items: center;
   width: 100%;
   height: 326px;
-  background-image: url("../../assets/advert_bg3.png");
+  background-image: url("https://ceremony.yauma.cn/intro/ad/image/bg/advert_bg3.png");
   background-size: 100% 100%;
   overflow: auto;
   &::after {
@@ -509,11 +572,13 @@ const scrolling = (e: any) => {
       width: 18px;
       height: 18px;
     }
-    .icon2 {
+    .phoneNumber {
       display: block;
       margin-left: 4px;
-      width: 98px;
-      height: 11px;
+      font-size: 15px;
+      color: #4da6ff;
+      line-height: 20px;
+      font-weight: bold;
     }
   }
   .qrcode {
@@ -550,11 +615,24 @@ const scrolling = (e: any) => {
     margin: 0 auto;
     background-image: url("../../assets/advert_btn.png");
     background-size: 100% 100%;
+    animation: breathe 2.5s infinite reverse ease-in-out;
     .link {
       display: block;
       margin-top: 12px;
       width: 108px;
       height: 22px;
+    }
+  }
+
+  @keyframes breathe {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 }
