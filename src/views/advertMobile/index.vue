@@ -365,7 +365,7 @@ const scrolling = (e: any) => {
       </div>
       <img class="qrcode" alt="code" src="~@/assets/advert_qrcode.png" />
       <div class="beian">
-        <p>©2022-2023 Copyright by Yauma All rights reserved</p>
+        <p>©2023-2024 Copyright by Yauma All rights reserved</p>
         <p>深圳前海路航链动科技有限公司</p>
         <p>粤ICP备2023052651号</p>
         <p>粤公网安备44030502010444号</p>

@@ -75,6 +75,18 @@ onMounted(() => {
       startPlay: MyPlayIcon
     }
   });
+  player1.on("play", () => {
+    player2?.pause();
+    player3?.pause();
+  });
+  player2.on("play", () => {
+    player1?.pause();
+    player3?.pause();
+  });
+  player3.on("play", () => {
+    player1?.pause();
+    player2?.pause();
+  });
 });
 
 const scrollToAnchor = (index: number) => {
@@ -99,7 +111,10 @@ const scrollToAnchor = (index: number) => {
     default:
       break;
   }
-  currentRef?.scrollIntoView({ behavior: "smooth" });
+  currentRef?.scrollIntoView({
+    behavior: "smooth",
+    block: index == 0 ? "start" : "center"
+  });
 };
 
 const scrolling = (e: any) => {
@@ -129,18 +144,20 @@ const switchVideoURL = async (url: string, index: number, activeId: number) => {
   switch (index) {
     case 1:
       activeCard1.value = activeId;
-      player1?.pause();
-      player1?.switchURL(url);
+      player1?.switchURL(url, {
+        currentTime: 0
+      });
       setTimeout(() => {
-        player1?.play();
+        player1?.seek(0);
       }, 1000);
       break;
     case 2:
       activeCard2.value = activeId;
-      player2?.pause();
-      player2?.switchURL(url);
+      player2?.switchURL(url, {
+        currentTime: 0
+      });
       setTimeout(() => {
-        player2?.play();
+        player2?.seek(0);
       }, 1000);
       break;
     default:
@@ -193,7 +210,11 @@ const switchVideoURL = async (url: string, index: number, activeId: number) => {
           <img class="_599" src="~@/assets/pc/pc_599.png" />
         </p>
         <div class="card-main">
-          <p class="title-name">案例一：客户纪录片</p>
+          <p class="title-name">
+            案例{{
+              activeCard1 == 1 ? "一" : activeCard1 == 2 ? "二" : "三"
+            }}：客户纪录片
+          </p>
           <div class="renderVideo" id="video1"></div>
         </div>
         <div class="card-right">
@@ -244,7 +265,11 @@ const switchVideoURL = async (url: string, index: number, activeId: number) => {
           <img class="_1699" src="~@/assets/pc/pc_1699.png" />
         </p>
         <div class="card-main">
-          <p class="title-name">案例二：客户纪录片</p>
+          <p class="title-name">
+            案例{{
+              activeCard2 == 1 ? "一" : activeCard2 == 2 ? "二" : "三"
+            }}：：客户纪录片
+          </p>
           <div class="renderVideo" id="video2"></div>
         </div>
         <div class="card-right">
@@ -308,7 +333,7 @@ const switchVideoURL = async (url: string, index: number, activeId: number) => {
       </p>
       <div class="beian">
         <p>
-          ©2022-2023 Copyright by Yauma All rights reserved |
+          ©2023-2024 Copyright by Yauma All rights reserved |
           深圳前海路航链动科技有限公司
         </p>
         <p>粤ICP备2023052651号 | 粤公网安备44030502010444号</p>
