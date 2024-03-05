@@ -290,16 +290,16 @@ const switchVideoURL = async (url: string, index: number, activeId: number) => {
             :class="`video-item ${
               activeCard2 == 2 ? 'video-item__active' : ''
             } `"
-            src="https://ceremony.yauma.cn/intro/ad/image/pc2_2.png"
+            src="https://ceremony.yauma.cn/intro/ad/image/pc2_3.png"
             @click="
               switchVideoURL(
-                'https://ceremony.yauma.cn/intro/ad/video/2_2.webm',
+                'https://ceremony.yauma.cn/intro/ad/video/2_3.webm',
                 2,
                 2
               )
             "
           />
-          <img
+          <!-- <img
             :class="`video-item ${
               activeCard2 == 3 ? 'video-item__active' : ''
             } `"
@@ -311,7 +311,7 @@ const switchVideoURL = async (url: string, index: number, activeId: number) => {
                 3
               )
             "
-          />
+          /> -->
         </div>
       </div>
       <div class="card3" id="section4" ref="section4Ref">

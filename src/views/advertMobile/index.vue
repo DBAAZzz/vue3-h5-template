@@ -81,21 +81,21 @@ onMounted(() => {
       startPlay: MyPlayIcon
     }
   });
-  player5 = new Player({
-    id: "video5",
-    url: "https://ceremony.yauma.cn/intro/ad/video/2_2.mp4",
-    width: "66.67vw",
-    height: "37.5vw",
-    poster: "https://ceremony.yauma.cn/intro/ad/image/2_2.png",
-    playbackRate: [1],
-    defaultPlaybackRate: 1,
-    playsinline: true,
-    controlsList: ["noremoteplayback", "nodownload"],
-    videoInit: true,
-    icons: {
-      startPlay: MyPlayIcon
-    }
-  });
+  // player5 = new Player({
+  //   id: "video5",
+  //   url: "https://ceremony.yauma.cn/intro/ad/video/2_2.mp4",
+  //   width: "66.67vw",
+  //   height: "37.5vw",
+  //   poster: "https://ceremony.yauma.cn/intro/ad/image/2_2.png",
+  //   playbackRate: [1],
+  //   defaultPlaybackRate: 1,
+  //   playsinline: true,
+  //   controlsList: ["noremoteplayback", "nodownload"],
+  //   videoInit: true,
+  //   icons: {
+  //     startPlay: MyPlayIcon
+  //   }
+  // });
   player6 = new Player({
     id: "video6",
     url: "https://ceremony.yauma.cn/intro/ad/video/2_3.mp4",
@@ -160,9 +160,9 @@ onMounted(() => {
   player4.on("play", () => {
     swipe2Autoplay.value = 0;
   });
-  player5.on("play", () => {
-    swipe2Autoplay.value = 0;
-  });
+  // player5.on("play", () => {
+  //   swipe2Autoplay.value = 0;
+  // });
   player6.on("play", () => {
     swipe2Autoplay.value = 0;
   });
@@ -170,9 +170,9 @@ onMounted(() => {
   player4.on("pause", () => {
     swipe2Autoplay.value = 2000;
   });
-  player5.on("pause", () => {
-    swipe2Autoplay.value = 2000;
-  });
+  // player5.on("pause", () => {
+  //   swipe2Autoplay.value = 2000;
+  // });
   player6.on("pause", () => {
     swipe2Autoplay.value = 2000;
   });
@@ -180,9 +180,9 @@ onMounted(() => {
   player4.on("ended", () => {
     swipe2Autoplay.value = 2000;
   });
-  player5.on("ended", () => {
-    swipe2Autoplay.value = 2000;
-  });
+  // player5.on("ended", () => {
+  //   swipe2Autoplay.value = 2000;
+  // });
   player6.on("ended", () => {
     swipe2Autoplay.value = 2000;
   });
@@ -210,7 +210,7 @@ const swipe2Prev = () => {
 };
 
 const swipe2Next = () => {
-  if (swipeIndex2.value < 2) swipeRef1.value?.next();
+  if (swipeIndex2.value < 1) swipeRef1.value?.next();
   player4?.pause();
   player5?.pause();
   player6?.pause();
@@ -317,9 +317,9 @@ const scrolling = (e: any) => {
             <van-swipe-item
               ><div id="video4" class="video"></div
             ></van-swipe-item>
-            <van-swipe-item
+            <!-- <van-swipe-item
               ><div id="video5" class="video"></div
-            ></van-swipe-item>
+            ></van-swipe-item> -->
             <van-swipe-item
               ><div id="video6" class="video"></div
             ></van-swipe-item>
@@ -330,7 +330,7 @@ const scrolling = (e: any) => {
                 'indicator-item': true,
                 'indicator-item__active': index == swipeIndex2
               }"
-              v-for="(item, index) in 3"
+              v-for="(item, index) in 2"
             ></div>
           </div>
         </div>
